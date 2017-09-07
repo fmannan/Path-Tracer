@@ -21,7 +21,7 @@ $ make
 ```
 Run:
 ```
-$ ./pathtracer <number of samples>
+$ ./pathtracer object-file-path <number of samples>
 ```
 This will render the Stanford Dragon scene which is included.
 Take a look at src/main.cpp to see how to create a scene amd import objs.

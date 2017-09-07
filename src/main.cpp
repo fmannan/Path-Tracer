@@ -29,7 +29,17 @@ int main(int argc, char *argv[]) {
     time(&start);               // Start execution timer
     int samples = 4;            // Default samples per pixel
 
-    if (argc == 2) samples = atoi(argv[1]);
+	std::string obj_filepath = "../obj/dragon2.obj";
+
+	if (argc >= 2)
+		obj_filepath = argv[1];
+	else {
+		printf("Usage: %s object-filepath [number-of-samples]\n", argv[0]);
+		return -1;
+	}
+
+	if (argc == 3)
+		samples = atoi(argv[2]);
 
     Camera camera = Camera(Vec(0, -5, 2.5), Vec(0,0,1), 1280, 720);     // Create camera
     Scene scene = Scene();                                              // Create scene
@@ -40,7 +50,7 @@ int main(int argc, char *argv[]) {
     scene.add( dynamic_cast<Object*>(new Sphere(Vec(1004,0,0), 1000, Material(DIFF, Vec(0.4,0.4,0.85)))) );
     scene.add( dynamic_cast<Object*>(new Sphere(Vec(0,1006,0), 1000, Material())) );
     scene.add( dynamic_cast<Object*>(new Sphere(Vec(0,0,110), 100, Material(EMIT, Vec(1,1,1), Vec(2.2,2.2,2.2)))) );
-    scene.add( dynamic_cast<Object*>(new Mesh(Vec(), "../obj/dragon2.obj", Material(DIFF, Vec(0.9, 0.9, 0.9)))) );
+    scene.add( dynamic_cast<Object*>(new Mesh(Vec(), obj_filepath.c_str(), Material(DIFF, Vec(0.9, 0.9, 0.9)))) );
 
 
     Renderer renderer = Renderer(&scene, &camera);  // Create renderer with our scene and camera
